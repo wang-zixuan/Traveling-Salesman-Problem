@@ -17,9 +17,9 @@ public class Coordinate {
         return y;
     }
 
-    public double calcEucDist(Coordinate coordinate) {
+    public int calcEucDist(Coordinate coordinate) {
         int distX = Math.abs(this.x - coordinate.getX());
         int distY = Math.abs(this.x - coordinate.getY());
-        return Math.sqrt(distX * distX + distY * distY);
+        return (int) Math.sqrt(distX * distX + distY * distY);
     }
 }

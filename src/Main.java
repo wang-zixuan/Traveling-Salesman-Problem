@@ -35,22 +35,27 @@ public class Main {
         int cutoffTime = Integer.parseInt(arguments.get(TIME));
         int seed = Integer.parseInt(arguments.get(SEED));
 
-        Graph g = FileUtil.ReadCityData(filename);
+        Graph g = FileUtil.readCityData(filename);
+
+        if (g == null) {
+            throw new NullPointerException("Can't read data!");
+        }
 
         switch (alg) {
             case BRUTE_FORCE:
                 BruteForce.findShortestCycle(g, cutoffTime, seed);
+                FileUtil.storeResults(BRUTE_FORCE, g, cutoffTime, seed);
                 break;
             case APPROX:
                 Approximation.findShortestCycle(g, cutoffTime, seed);
+                FileUtil.storeResults(APPROX, g, cutoffTime, seed);
                 break;
             case LOCAL_SEARCH:
                 LocalSearch.findShortestCycle(g, cutoffTime, seed);
+                FileUtil.storeResults(LOCAL_SEARCH, g, cutoffTime, seed);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid -alg argument!");
         }
-
-        // store results
     }
 }
