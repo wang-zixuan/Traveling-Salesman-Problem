@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import algo.approx.Approximation;
@@ -18,13 +17,13 @@ public class Main {
     private static final String APPROX = "Approx";
     private static final String LOCAL_SEARCH = "LS";
 
-    private static Map<String, String> arguments = new HashMap<>();
-
     public static void main(String[] args) {
         // Command line arguments
-        if (args.length != 8) {
-            throw new IllegalArgumentException("Please enter 4 input arguments!");
+        if (args.length != 6 && args.length != 8) {
+            throw new IllegalArgumentException("Please enter 3 or 4 input arguments!");
         }
+
+        Map<String, String> arguments = new HashMap<>();
 
         for (int i = 0; i < args.length; i += 2) {
             arguments.put(args[i].substring(1), args[i + 1]);
@@ -33,7 +32,7 @@ public class Main {
         String filename = arguments.get(INST);
         String alg = arguments.get(ALG);
         int cutoffTime = Integer.parseInt(arguments.get(TIME));
-        int seed = Integer.parseInt(arguments.get(SEED));
+        int seed = Integer.parseInt(arguments.getOrDefault(SEED, "0"));
 
         Graph g = FileUtil.readCityData(filename);
 
@@ -43,19 +42,18 @@ public class Main {
 
         switch (alg) {
             case BRUTE_FORCE:
-                BruteForce.findShortestCycle(g, cutoffTime, seed);
-                FileUtil.storeResults(BRUTE_FORCE, g, cutoffTime, seed);
+                BruteForce.findShortestCycle(g, cutoffTime);
                 break;
             case APPROX:
-                Approximation.findShortestCycle(g, cutoffTime, seed);
-                FileUtil.storeResults(APPROX, g, cutoffTime, seed);
+                Approximation.findShortestCycle(g, seed);
                 break;
             case LOCAL_SEARCH:
                 LocalSearch.findShortestCycle(g, cutoffTime, seed);
-                FileUtil.storeResults(LOCAL_SEARCH, g, cutoffTime, seed);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid -alg argument!");
         }
+
+        FileUtil.storeResults(alg, g, cutoffTime, seed);
     }
 }

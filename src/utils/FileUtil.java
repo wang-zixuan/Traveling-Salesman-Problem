@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedWriter;
@@ -17,6 +16,10 @@ public class FileUtil {
     private static final String NAME = "NAME";
     private static final String NODE_COORD_SECTION = "NODE_COORD_SECTION";
     private static final String DIMENSION = "DIMENSION";
+
+    private static final String BRUTE_FORCE = "BF";
+    private static final String APPROX = "Approx";
+    private static final String LOCAL_SEARCH = "LS";
 
     public static Graph readCityData(String filename) {
         BufferedReader bufferedReader;
@@ -51,6 +54,10 @@ public class FileUtil {
                 }
             }
 
+            if (cityName.length() == 0 || coordinates.size() == 0 || dimension == 0) {
+                throw new RuntimeException("No data found!");
+            }
+
             return new Graph(cityName, dimension, coordinates);
 
         } catch (IOException e) {
@@ -61,7 +68,21 @@ public class FileUtil {
 
     public static void storeResults(String algName, Graph g, int cutoffTime, int seed) {
         String dirName = "./results/" + algName + "/";
-        String fileName = g.getCityName().toLowerCase() + "_" + algName + "_" + cutoffTime + "_" + seed + ".sol";
+        String fileName = g.getCityName().toLowerCase() + "_" + algName + "_";
+
+        switch (algName) {
+            case BRUTE_FORCE:
+                fileName += cutoffTime + ".sol";
+                break;
+            case APPROX:
+                fileName += seed + ".sol";
+                break;
+            case LOCAL_SEARCH:
+                fileName += cutoffTime + "_" + seed + ".sol";
+                break;
+            default:
+                break;
+        }
 
         File dir = new File(dirName);
         if (!dir.exists()) {
@@ -74,14 +95,12 @@ public class FileUtil {
         }
 
         try {
-
             FileWriter fileWriter = new FileWriter(dirName + fileName);
             BufferedWriter bw = new BufferedWriter(fileWriter);
-            bw.write(String.valueOf(g.getMinimumCost()));
+            bw.write(String.valueOf((double) g.getMinimumCost()));
             bw.newLine();
             bw.write(g.getResultToString());
             bw.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

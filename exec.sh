@@ -1,10 +1,12 @@
 #!/bin/bash
 
 # Check if the number of arguments provided is correct
-if [ "$#" -ne 8 ]; then
-    echo "Usage: $0 -inst [file] -alg [algorithm] -time [time limit] -seed [seed]"
+if [ "$#" -ne 6 ] && [ "$#" -ne 8 ]; then
+    echo "Usage: $0 -inst [file] -alg [algorithm] -time [time limit] (-seed [seed])"
     exit 1
 fi
+
+seed=""
 
 # Parse command line arguments
 while [[ "$#" -gt 0 ]]; do
@@ -21,4 +23,8 @@ done
 # Run Java program with provided arguments
 cd src
 javac Main.java
-java Main -inst "$file" -alg "$algorithm" -time "$time" -seed "$seed"
+if [ -z "$seed" ]; then
+    java Main -inst "$file" -alg "$algorithm" -time "$time"
+else
+    java Main -inst "$file" -alg "$algorithm" -time "$time" -seed "$seed"
+fi
