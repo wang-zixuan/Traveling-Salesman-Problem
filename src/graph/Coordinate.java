@@ -10,11 +10,11 @@ public class Coordinate {
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
     public int getY() {
-        return y;
+        return this.y;
     }
 
     public int calcEucDist(Coordinate coordinate) {
