@@ -50,6 +50,8 @@ public class FileUtil {
                         int x = (int) Double.parseDouble(coordData[1]);
                         int y = (int) Double.parseDouble(coordData[2]);
                         coordinates.add(new Coordinate(index, x, y));
+                    } else {
+                        break;
                     }
                 }
             }
