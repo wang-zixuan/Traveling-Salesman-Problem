@@ -1,12 +1,18 @@
 package graph;
 
 public class Coordinate {
+    private int index;
     private int x;
     private int y;
 
-    public Coordinate(int x, int y) {
+    public Coordinate(int index, int x, int y) {
+        this.index = index;
         this.x = x;
         this.y = y;
+    }
+
+    public int getIndex() {
+        return this.index;
     }
 
     public int getX() {
