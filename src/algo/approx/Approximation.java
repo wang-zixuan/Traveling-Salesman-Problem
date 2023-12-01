@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Approximation {
 
-    public static void findShortestCycle(Graph g, int cutoffTime, int seed) {
+    public static void findShortestCycle(Graph g, int seed) {
         // Set a seed for reproducibility
         Random rand = new Random(seed);
 
