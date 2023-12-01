@@ -13,13 +13,15 @@ public class LocalSearch {
 
     public static void findShortestCycle(Graph g, int cutoffTime, int seed) {
         int dimension = g.getDimension();
-
+        
+        // Initialize with a random tour (initial solution)
         List<Integer> currentTour = generateRandomTour(dimension, seed);
         int currentCost = calculateTourCost(g, currentTour);
 
         long startTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
 
         while (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - startTime < cutoffTime) {
+            // Generate neighboring solution by swapping two random cities
             List<Integer> neighborTour = generateNeighborTour(currentTour);
             int neighborCost = calculateTourCost(g, neighborTour);
             if (neighborCost < currentCost) {
@@ -55,6 +57,7 @@ public class LocalSearch {
             int city2 = tour.get(i + 1) - 1;
             cost += g.getAdjacencyMatrix()[city1][city2];
         }
+        // Add the cost of returning to the starting city
         int firstCity = tour.get(0) - 1;
         int lastCity = tour.get(tour.size() - 1) - 1;
         cost += g.getAdjacencyMatrix()[lastCity][firstCity];
