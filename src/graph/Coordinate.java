@@ -19,7 +19,8 @@ public class Coordinate {
 
     public int calcEucDist(Coordinate coordinate) {
         int distX = Math.abs(this.x - coordinate.getX());
-        int distY = Math.abs(this.x - coordinate.getY());
-        return (int) Math.sqrt(distX * distX + distY * distY);
+        int distY = Math.abs(this.y - coordinate.getY());
+        long squaredDist = (long) distX * distX + (long) distY * distY;
+        return (int) Math.sqrt(squaredDist);
     }
 }
