@@ -38,8 +38,7 @@ public class FileUtil {
                 if (!isNodeCoordSection) {
                     if (line.startsWith(NAME)) {
                         cityName = line.split("\\s+")[1];
-                    }
-                    else if (line.startsWith(DIMENSION)) {
+                    } else if (line.startsWith(DIMENSION)) {
                         dimension = Integer.parseInt(line.split("\\s+")[1]);
                     } else if (line.startsWith(NODE_COORD_SECTION)) {
                         isNodeCoordSection = true;
@@ -47,9 +46,10 @@ public class FileUtil {
                 } else {
                     if (!line.equals("EOF")) {
                         String[] coordData = line.split("\\s+");
+                        int index = Integer.parseInt(coordData[0]);
                         int x = (int) Double.parseDouble(coordData[1]);
                         int y = (int) Double.parseDouble(coordData[2]);
-                        coordinates.add(new Coordinate(x, y));
+                        coordinates.add(new Coordinate(index, x, y));
                     }
                 }
             }
