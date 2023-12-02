@@ -13,7 +13,7 @@ public class LocalSearch {
 
     public static void findShortestCycle(Graph g, int cutoffTime, int seed) {
         int dimension = g.getDimension();
-        
+
         // Initialize with a random tour (initial solution)
         List<Integer> currentTour = generateRandomTour(dimension, seed);
         int currentCost = calculateTourCost(g, currentTour);
@@ -30,6 +30,15 @@ public class LocalSearch {
                 updateGraphResult(g, currentTour, currentCost);
             }
         }
+    }
+
+    private static List<Integer> generateRandomTour(int dimension, int seed) {
+        List<Integer> tour = new ArrayList<>();
+        for (int i = 1; i <= dimension; i++) {
+            tour.add(i);
+        }
+        Collections.shuffle(tour, new Random(seed));
+        return tour;
     }
 
     private static List<Integer> generateNeighborTour(List<Integer> tour) {
@@ -54,15 +63,6 @@ public class LocalSearch {
         return neighborTour;
     }
 
-
-    private static List<Integer> generateNeighborTour(List<Integer> tour) {
-        int tourSize = tour.size();
-        List<Integer> neighborTour = new ArrayList<>(tour);
-        int randomIndex1 = (int) (Math.random() * tourSize);
-        int randomIndex2 = (int) (Math.random() * tourSize);
-        Collections.swap(neighborTour, randomIndex1, randomIndex2);
-        return neighborTour;
-    }
 
     private static int calculateTourCost(Graph g, List<Integer> tour) {
         int cost = 0;
