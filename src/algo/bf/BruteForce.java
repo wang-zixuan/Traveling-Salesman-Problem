@@ -34,7 +34,7 @@ public class BruteForce {
     }
 
     /**
-     * Helper function for recursion.
+     * Helper function for backtracking.
      *
      * @param g The input graph.
      * @param dimension Dimension of current instance.
@@ -69,6 +69,7 @@ public class BruteForce {
             if (!visited[i]) {
                 // if current cost or current cost plus edge cost is bigger than minimum cost, then ignore
                 if (curCost > minimumCost || curCost + g.getAdjacencyMatrix()[cur][i] > minimumCost) continue;
+                // backtracking
                 visited[i] = true;
                 result.add(i + 1);
                 tspHelper(g, dimension, i, visited, curCost + g.getAdjacencyMatrix()[cur][i],
