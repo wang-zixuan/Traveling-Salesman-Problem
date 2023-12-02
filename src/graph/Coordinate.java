@@ -1,5 +1,8 @@
 package graph;
 
+/**
+ * Coordinate class to store the location of each vertex on a 2D plane.
+ */
 public class Coordinate {
     private int index;
     private int x;
@@ -23,6 +26,12 @@ public class Coordinate {
         return this.y;
     }
 
+    /**
+     * Calculate Euclidean distances between two coordinates.
+     *
+     * @param coordinate The input coordinate.
+     * @return Euclidean distance between two coordinates.
+     */
     public int calcEucDist(Coordinate coordinate) {
         int distX = Math.abs(this.x - coordinate.getX());
         int distY = Math.abs(this.y - coordinate.getY());

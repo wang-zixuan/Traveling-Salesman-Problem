@@ -2,6 +2,9 @@ package graph;
 
 import java.util.List;
 
+/**
+ * Graph class to store information of an instance.
+ */
 public class Graph {
     private String cityName;
     private int dimension;
@@ -52,6 +55,7 @@ public class Graph {
         this.minimumCost = minimumCost;
     }
 
+    // calculate adjacency matrix based on Euclidean distances
     private void setAdjacencyMatrix() {
         this.adjacencyMatrix = new int[this.dimension][this.dimension];
         for (int i = 0; i < this.dimension; i++) {

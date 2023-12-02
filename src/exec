@@ -21,7 +21,6 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Run Java program with provided arguments
-cd src
 javac Main.java
 if [ -z "$seed" ]; then
     java Main -inst "$file" -alg "$algorithm" -time "$time"

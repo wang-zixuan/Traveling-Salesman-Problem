@@ -7,6 +7,10 @@ import algo.ls.LocalSearch;
 import graph.Graph;
 import utils.FileUtil;
 
+/**
+ * Main class to get arguments from command line
+ * and run different methods to solve TSP.
+ */
 public class Main {
     private static final String INST = "inst";
     private static final String ALG = "alg";
@@ -18,13 +22,12 @@ public class Main {
     private static final String LOCAL_SEARCH = "LS";
 
     public static void main(String[] args) {
-        // Command line arguments
+        // length of command line arguments must be 6 or 8 (seed is optional)
         if (args.length != 6 && args.length != 8) {
             throw new IllegalArgumentException("Please enter 3 or 4 input arguments!");
         }
 
         Map<String, String> arguments = new HashMap<>();
-
         for (int i = 0; i < args.length; i += 2) {
             arguments.put(args[i].substring(1), args[i + 1]);
         }

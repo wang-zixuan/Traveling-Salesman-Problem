@@ -27,9 +27,6 @@ public class Approximation {
         // Perform Preorder tree walk on the MST to generate a cycle
         preorderTraversal(mstEdges, result, seed);
 
-        // Return to the starting point to complete the cycle
-        result.add(result.get(0));
-
         // Set the result and minimum cost in the Graph object
         g.setResult(result);
         g.setMinimumCost(calculatePathCost(g, result));
