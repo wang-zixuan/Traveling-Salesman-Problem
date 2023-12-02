@@ -32,14 +32,28 @@ public class LocalSearch {
         }
     }
 
-    private static List<Integer> generateRandomTour(int dimension, int seed) {
-        List<Integer> tour = new ArrayList<>();
-        for (int i = 1; i <= dimension; i++) {
-            tour.add(i);
+    private static List<Integer> generateNeighborTour(List<Integer> tour) {
+        int n = tour.size();
+        List<Integer> neighborTour = new ArrayList<>(tour);
+        int i = (int) (Math.random() * n);
+        int j = (int) (Math.random() * n);
+        while (i == j) {
+            j = (int) (Math.random() * n);
         }
-        Collections.shuffle(tour, new Random(seed));
-        return tour;
+        if (i > j) {
+            int temp = i;
+            i = j;
+            j = temp;
+        }
+        // Reverse the order of nodes between i and j
+        while (i < j) {
+            Collections.swap(neighborTour, i, j);
+            i++;
+            j--;
+        }
+        return neighborTour;
     }
+
 
     private static List<Integer> generateNeighborTour(List<Integer> tour) {
         int tourSize = tour.size();
