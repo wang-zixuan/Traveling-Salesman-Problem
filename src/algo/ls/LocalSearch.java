@@ -98,10 +98,6 @@ public class LocalSearch {
             int city2 = tour.get(i + 1) - 1;
             cost += g.getAdjacencyMatrix()[city1][city2];
         }
-        // Add the cost of returning to the starting city
-        int firstCity = tour.get(0) - 1;
-        int lastCity = tour.get(tour.size() - 1) - 1;
-        cost += g.getAdjacencyMatrix()[lastCity][firstCity];
         return cost;
     }
 
